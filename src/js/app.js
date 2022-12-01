@@ -2,21 +2,12 @@ import { json, read } from "./basic";
 
 export class GameSavingLoader {
     static load() {
-        return new Promise((resolve, reject) => {
-            let data;
-            read().then((buffer) => {
-                data = buffer
-                json(data).then((son) => {
-                        resolve(son);
-
-                })
-
-            });
-        })
-
-
+        return read().then((buffer) => json(buffer).then((son) => JSON.parse(son)));
     }
+
+
 }
+
 GameSavingLoader.load().then((saving) => {
     console.log(saving)
 })
